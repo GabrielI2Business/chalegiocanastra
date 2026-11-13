@@ -1,0 +1,33 @@
+/* Scroll chapters: complete vertical story first; immersive pin when space allows. */
+#rooms-scroll{position:relative;--room-progress:0%}
+.rooms-index{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:0 0 20px;margin-bottom:30px;border-bottom:1px solid var(--line);position:relative}
+.rooms-index::after{content:'';position:absolute;left:0;bottom:-1px;height:2px;width:var(--room-progress);background:var(--ink)}
+.room-step{display:flex;align-items:baseline;gap:18px;font-family:var(--serif);font-size:27px;color:var(--muted);line-height:1.3;transition:color .3s}
+.room-step>span{font-family:var(--sans);font-size:9px;letter-spacing:.08em}
+.room-step.is-active{color:var(--ink)}
+.room-step.is-active::after{content:'↗';margin-left:auto;margin-right:22px;font-family:var(--sans);font-size:20px}
+.rooms-stage{display:grid;gap:85px;position:relative}
+.room-chapter{display:block;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.15em;line-height:1.6;margin-bottom:17px;color:var(--olive)}
+#rooms-scroll .room-panel{scroll-margin-top:110px}
+#rooms-scroll .room-card{align-self:center}
+.rooms-enhanced .rooms-stage{display:block;height:min(590px,calc(100svh - 210px));min-height:0;overflow:hidden}
+.rooms-enhanced .room-panel{position:absolute;inset:0;width:100%;height:100%;min-height:0;will-change:transform,opacity;transform-origin:center center}
+.rooms-enhanced .room-panel:nth-child(1){z-index:1}
+.rooms-enhanced .room-panel:nth-child(2){z-index:2}
+.rooms-enhanced .room-panel:nth-child(3){z-index:3}
+.rooms-enhanced .room-image{height:100%;min-height:0}
+.rooms-enhanced .room-card{max-height:100%;padding-top:34px;padding-bottom:34px;overflow-y:auto;overscroll-behavior:contain}
+.rooms-enhanced .room-card h3{font-size:clamp(44px,4.2vw,62px);margin-top:20px;margin-bottom:20px}
+.rooms-enhanced .room-card p{font-size:13px;line-height:1.85}
+.rooms-enhanced .room-card-footer{margin-top:24px;padding-top:18px}
+.rooms-enhanced .room-chapter{display:none}
+@media(max-width:1100px){.room-step{font-size:24px;gap:12px}.rooms-stage{gap:65px}}
+@media(max-width:800px){.rooms-index{gap:15px}.room-step{font-size:22px;gap:8px}}
+@media(max-width:600px){
+ .rooms-index{display:none}
+ .rooms-stage{gap:48px}
+ #rooms-scroll .room-panel{height:auto;min-height:0}
+ #rooms-scroll .room-card{align-self:flex-end}
+ .room-chapter{font-size:10px;margin-bottom:16px}
+}
+html[data-motion=reduced] .rooms-stage{overflow:visible}
